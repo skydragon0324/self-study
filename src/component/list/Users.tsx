@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { User } from "../../utils/types";
 import axios from "axios";
-import { UseAppContext } from "../context/AppContextProvider";
 
 
-type userType = {
-  userId: number | null;
-}
 
 const Users : React.FC<userType> = ({ userId }) => {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,7 +11,7 @@ const Users : React.FC<userType> = ({ userId }) => {
       try {
         const response = await fetch("https://jsonplaceholder.typicode.com/todos/").then((res) => res.json());
         console.log("users:", response);
-        setApiData(response);
+        setUsers(response);
       } catch (error) {
         console.log(error);        
       }
@@ -27,23 +23,6 @@ const Users : React.FC<userType> = ({ userId }) => {
     const tempUsers = users.filter((user) => !userId || user.userId === userId);
     setFilterUsers(tempUsers);
   },[userId, users])
-
-  const context = UseAppContext();
-  if (!context) {
-    console.log("AppContext not Found");
-    return null!
-  }
-    // fetch data
-  const {
-    global:{
-          globalValue  
-    },
-    apiValue:{
-          apiData, setApiData
-    }
-  } = context
-  console.log("global", globalValue);
-  console.log("apiValue", apiData);
   
   return (
     <div className="flex flex-col w-1/2 pt-20 text-xl gap-4 text-gray-500  bg-gray-800 justify-center items-center">

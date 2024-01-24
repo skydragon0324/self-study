@@ -2,15 +2,6 @@ import React, { Component, useState } from "react";
 import { Modal } from "react-overlays";
 import ModalFooter from "./ModalFooter";
 
-
-interface customModalType {
-  showModal: boolean;
-  handleClose: () => void;
-  modalHeader: React.ReactNode;
-  modalBody: React.ReactNode;
-  modalFooter: React.ReactNode;
-}
-
 const rederBackdrop = (props: any) => (
   <div
     className="fixed z-50 top-0 bottom-0 left-0 right-0 bg-black opacity-50"
