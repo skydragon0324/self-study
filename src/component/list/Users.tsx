@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { User } from "../../utils/types";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
+import { StateInterface } from "@/store/store";
+import { Dispatch } from "redux";
 
 
 
 const Users : React.FC<userType> = ({ userId }) => {
-  const [users, setUsers] = useState<User[]>([]);
+  const { users } = useSelector<StateInterface, UserStateType>((state) => state.UserReducer);
+  const dispatch: Dispatch<any> = useDispatch();
   useEffect(() => {
     (async() => { 
       try {
         const response = await fetch("https://jsonplaceholder.typicode.com/todos/").then((res) => res.json());
-        console.log("users:", response);
-        setUsers(response);
+        if(response) {
+          dispatch({
+            type: "CHANGE_USERS",
+            payload: {
+              users: response
+            }
+          })
+        }
       } catch (error) {
         console.log(error);        
       }
     })();
   }, [])
-  const [filterUsers, setFilterUsers] = useState<User[]>([]);
+ 
+  const [filterUsers, setFilterUsers] = useState<User[] | undefined>([]);
   
   useEffect(() => {
-    const tempUsers = users.filter((user) => !userId || user.userId === userId);
+    const tempUsers = users?.filter((user) => !userId || user.userId === userId);
     setFilterUsers(tempUsers);
   },[userId, users])
   

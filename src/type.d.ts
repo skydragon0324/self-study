@@ -20,3 +20,9 @@ interface customModalType {
 interface ModalStateActionType {
   type: string,
 }
+interface ModalStateType {
+  openModalState: boolean;
+}
+interface UserStateType {
+  users: User[] | undefined;
+}
