@@ -1,4 +1,5 @@
-import { actionTypes } from "../actions/actionTypes";
+import * as Actions from "../actions";
+import { Action } from "../store";
 
 interface ModalStateType {
   openModalState: boolean;
@@ -8,12 +9,12 @@ const initialState: ModalStateType = {
   openModalState: false,
 };
 
-const ModalReducer = (state: ModalStateType = initialState, action: ModalStateActionType): ModalStateType => {
+const ModalReducer = (state: ModalStateType = initialState, action: Action<ModalStateType>): ModalStateType => {
   switch (action.type) {
-    case actionTypes.OPEN_MODAL:
+    case Actions.OPEN_MODAL:
       return {
         ...state,
-        openModalState: !state.openModalState, // Update openModalState to true
+        openModalState: !state.openModalState,
       };
     default:
       return state;

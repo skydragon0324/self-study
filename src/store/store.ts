@@ -22,7 +22,7 @@ export const store = configureStore({
 export type StateInterface = ReturnType<typeof store.getState>;
 
 export interface Action<T = string> {
-  type: "OPEN_MODAL";
+  type: string;
   payload: Partial<T>
 }
 
