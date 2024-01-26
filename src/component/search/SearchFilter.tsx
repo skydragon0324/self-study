@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from "react";
+import Select, { MultiValue } from "react-select";
 
+const tempData : selectOptionType[] = [
+  { value: "red", label: "Red" },
+  { value: "green", label: "Green" },
+  { value: "yellow", label: "Yellow" },
+  { value: "blue", label: "Blue" },
+  { value: "white", label: "White" }
+];
 
-const tempData = [
-  "Apple",
-  "Banana",
-  "Orange",
-  "Oil",
-  "Tomato",
-  "Peanut",
-  "Milk",
-  "Cherry"
-]
-
-type searchType = {
-  search : (value: number) => void;
-}
-
-export const SearchFilter : React.FC<searchType> = ({ search }) => {
+export const SearchFilter : React.FC = () => {
   
-  const [filter, setFilter] = useState<string>("");
+  const [selectOptions, setSelectOptions] = useState<selectOptionType[]>([]);
+  const handleSelectChange = (newValue: MultiValue<selectOptionType>) => {
+   console.log("alkdjf", newValue);
+    setSelectOptions(newValue as selectOptionType[]);
+  }
   
+  const customStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      borderRadius: '8px', // Adjust the border radius as needed
+      borderColor: state.isFocused ? '#4F46E5' : '#CBD5E0', // Change the border color on focus
+      boxShadow: state.isFocused ? '0 0 0 1px #4F46E5' : 'none', // Add a box shadow on focus
+    }),
+  }
+
   return (
     <div>
       <div className="flex gap-4 justify-center items-center">
         <label htmlFor="search">Search</label>
-        <input 
-          className="p-2 rounded-md bg-gray-700 border-gray-400 border-2 text-blue-300 focus:border-blue-500 duration-300 transition-all outline-none" 
-          id="search" 
-          onChange={(e) => search(parseInt(e.target.value))} 
-          placeholder="Search by UserId"
+        <Select 
+          className="w-[400px]"
+          options={tempData}
+          placeholder="select color"
+          value={selectOptions}
+          onChange={handleSelectChange}
+          isMulti
+          styles={customStyles}
         />
       </div>
     </div>

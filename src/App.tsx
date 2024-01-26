@@ -47,7 +47,7 @@ function App() {
         >
           Open Modal
         </button>
-        <SearchFilter search = {setSearch} />
+        <SearchFilter />
         <Users userId = {search} />
       </div>
       <CustomModal 

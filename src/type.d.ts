@@ -26,3 +26,8 @@ interface ModalStateType {
 interface UserStateType {
   users: User[] | undefined;
 }
+
+type selectOptionType = {
+  value: string;
+  label: string;
+}
