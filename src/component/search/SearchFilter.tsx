@@ -24,6 +24,11 @@ export const SearchFilter : React.FC = () => {
       borderColor: state.isFocused ? '#4F46E5' : '#CBD5E0', // Change the border color on focus
       boxShadow: state.isFocused ? '0 0 0 1px #4F46E5' : 'none', // Add a box shadow on focus
     }),
+    valueContainer: (provided:any, state: any) => ({
+      ...provided,
+      height: '30px',
+      padding: '0 6px'
+    })
   }
 
   return (

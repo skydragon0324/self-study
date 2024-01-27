@@ -10,6 +10,7 @@ import ModalBody from './component/modal/ModalBody';
 import ModalFooter from './component/modal/ModalFooter';
 import { SearchFilter } from './component/search/SearchFilter';
 import Users from './component/list/Users';
+import CustomCalender from './component/calendar';
 
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
         </button>
         <SearchFilter />
         <Users userId = {search} />
+      </div>
+      <div className="flex justify-center">
+        <CustomCalender />
       </div>
       <CustomModal 
         showModal = {openModalState}
